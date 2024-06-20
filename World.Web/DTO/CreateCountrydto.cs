@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace World.Web.Models
+namespace World.Web.DTO
 {
-    public class Country
+    public class CreateCountrydto
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

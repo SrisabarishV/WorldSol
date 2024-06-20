@@ -40,6 +40,26 @@ namespace World.Web.Controllers
             return Ok(country1);
         }
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var country= _dbContext.Countries.ToList();
+            return Ok(country);
+        }
+
+        [HttpGet]
+        [Route("Details")]
+        public IActionResult Get(int id)
+        { 
+           var country1= _dbContext.Countries.FirstOrDefault(x => x.Id == id);
+
+            if (country1 == null)
+            {
+                return NotFound($"Value not found for -{id}");
+            }
+            return Ok(country1);
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Create([FromBody] CreateCountrydto countryDto)

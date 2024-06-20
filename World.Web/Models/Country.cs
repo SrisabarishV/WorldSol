@@ -9,7 +9,7 @@ namespace World.Web.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        [MaxLength(5)]
+        [MaxLength(6)]
         public string ShortName { get; set; }
         [Required]
         [MaxLength(10)]

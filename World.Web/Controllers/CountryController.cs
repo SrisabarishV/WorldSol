@@ -20,12 +20,7 @@ namespace World.Web.Controllers
             _mapper = mapper; 
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var country= _dbContext.Countries.ToList();
-            return Ok(country);
-        }
+       
 
         [HttpGet]
         [Route("Details")]
@@ -33,32 +28,29 @@ namespace World.Web.Controllers
         { 
            var country1= _dbContext.Countries.FirstOrDefault(x => x.Id == id);
 
+            var countrydto=_mapper.Map<CreateCountrydto>(country1);
+
             if (country1 == null)
             {
                 return NotFound($"Value not found for -{id}");
             }
-            return Ok(country1);
+            return Ok(countrydto);
         }
 
         [HttpGet]
         public IActionResult Get()
         {
             var country= _dbContext.Countries.ToList();
-            return Ok(country);
-        }
 
-        [HttpGet]
-        [Route("Details")]
-        public IActionResult Get(int id)
-        { 
-           var country1= _dbContext.Countries.FirstOrDefault(x => x.Id == id);
-
-            if (country1 == null)
+            var countrydto= _mapper.Map<CreateCountrydto>(country);
+            if (country == null)
             {
-                return NotFound($"Value not found for -{id}");
+                return NoContent();
             }
-            return Ok(country1);
+            return Ok(countrydto);
         }
+
+        
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
